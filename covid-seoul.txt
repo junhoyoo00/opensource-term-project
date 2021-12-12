@@ -1,0 +1,90 @@
+import pandas as pd
+import matplotlib as mpl           
+import matplotlib.pyplot as plt    
+import numpy as np 
+
+url="https://www.seoul.go.kr/coronaV/coronaStatus.do"
+url
+
+table = pd.read_html(url)
+len(table)
+
+df=table[3]
+df
+
+ddf=df.T
+ddf
+
+sdf=df.drop(['일자'],axis=1)
+sdf
+
+ssdf=sdf.T
+ssdf.columns=('검사자(명)','확진자(명)','확진율(%)')
+ssdf
+
+s1df = ssdf.loc['12.11.']
+type(s1df)
+s1df
+
+
+s2df = ssdf.loc['12.10.']
+s2df
+
+s3df = ssdf.loc['12.9.']
+s3df
+
+
+s4df = ssdf.loc['12.8.']
+s4df
+
+s5df = ssdf.loc['12.7.']
+s5df
+
+s6df = ssdf.loc['12.6.']
+s6df
+
+s7df = ssdf.loc['12.5.']
+s7df
+
+filename0="seoul_week_covid19.csv"
+ssdf.to_csv(filename0,index=True)
+
+pd.read_csv(filename0)
+
+ssdf.mean(axis=0)
+
+fig=plt.figure()
+axes1=fig.add_subplot(1,7,1)
+axes1.plot(s1df['검사자(명)'],s1df['확진자(명)'],'o')
+
+fig=plt.figure()
+axes1=fig.add_subplot(3,3,1)
+axes2=fig.add_subplot(3,3,2)
+axes3=fig.add_subplot(3,3,3)
+axes4=fig.add_subplot(3,3,4)
+axes5=fig.add_subplot(3,3,5)
+axes6=fig.add_subplot(3,3,6)
+axes7=fig.add_subplot(3,3,7)
+
+axes1.plot(s7df['검사자(명)'],s7df['확진자(명)'],'o')
+axes2.plot(s6df['검사자(명)'],s6df['확진자(명)'],'o')
+axes3.plot(s5df['검사자(명)'],s5df['확진자(명)'],'o')
+axes4.plot(s4df['검사자(명)'],s4df['확진자(명)'],'o')
+axes5.plot(s3df['검사자(명)'],s3df['확진자(명)'],'o')
+axes6.plot(s2df['검사자(명)'],s2df['확진자(명)'],'o')
+axes7.plot(s1df['검사자(명)'],s1df['확진자(명)'],'o')
+
+fig.suptitle('seoul_week_covid19')
+axes1.set_title(12.5)
+axes2.set_title(12.6)
+axes3.set_title(12.7)
+axes4.set_title(12.8)
+axes5.set_title(12.9)
+axes6.set_title(12.10)
+axes7.set_title(12.11)
+fig.tight_layout()
+
+
+
+
+
